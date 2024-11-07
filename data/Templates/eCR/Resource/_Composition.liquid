@@ -79,7 +79,10 @@
                     "text":
                     {
                         "status":"generated",
-                        {% if component.section.text -%}
+                        {% comment %} We still need to get the data-id comment tags for lab results {% endcomment %}
+                        {% if component.section.code.code and component.section.code.code == "30954-2" and component.section.text -%}
+                            "div": "{{ component.section.text | to_html_string | remove: '\"' | remove: '"'}}"
+                        {% elsif component.section.text -%}
                             "div": "{{ component.section.text._innerText | clean_string_from_tabs | escape_special_chars }}",
                         {% elsif component.section.title._ -%}
                             "div":"<div xmlns=\"http://www.w3.org/1999/xhtml\">{{ component.section.title._ | escape }}</div>",
