@@ -1,6 +1,6 @@
 {% if entry.observation -%}
     {% assign observationId = entry.observation | to_json_string | generate_uuid -%}
-    {% if entry.observation.code.nullFlavor or entry.observation.value.nullFlavor -%}
+    {% if entry.observation.value.nullFlavor and entry.observation.value.originalText == null or entry.observation.code.nullFlavor -%}
     {% else -%}
         {% if entry.observation.templateId and entry.observation.templateId.root and entry.observation.templateId.root == '2.16.840.1.113883.10.20.34.3.45' -%}
         {% elsif entry.observation.templateId and entry.observation.templateId.root and entry.observation.templateId.root == '2.16.840.1.113883.10.20.22.4.200' -%}

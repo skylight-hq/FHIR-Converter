@@ -1,5 +1,6 @@
 {
     "fullUrl":"urn:uuid:{{ ID }}",
+        {{ observationEntry | print_object }}
     "resource":{
         "resourceType": "Observation",
         "id":"{{ ID }}",
@@ -72,16 +73,10 @@
             {% if observationEntry.value._ %}
                 "valueString":"{{ observationEntry.value._ }}",
             {% else %}
-                {% assign obsRefVal = observationEntry.value.reference.value | replace: '#', '' -%}
-                {% assign valueStringObject = text | find_object_by_id: obsRefVal -%}
-                {% if valueStringObject != null %}
-                        {% if valueStringObject._ != null %}
-                            {% assign valueString = valueStringObject._ | concat_strings %}
-                        {% elsif valueStringObject.content != null %}
-                            {% assign valueString = valueStringObject.content | concat_strings %}
-                        {% endif %}
-                    "valueString": "{{ valueString | replace: '\n', '\\n'  }}",
-                {% endif %}
+                {% assign obsRef = observationEntry.value.reference.value | default: observationEntry.value.originalText.reference.value -%}
+                {% assign obsRefVal = obsRef | replace: '#', '' -%}
+                {% assign valueString = text._innerText | find_inner_text_by_id: obsRefVal -%}
+                "valueString": "{{ valueString | escape_special_chars }}",
             {% endif %}
         {% endif -%}
         "referenceRange":
