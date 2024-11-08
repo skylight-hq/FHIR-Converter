@@ -198,7 +198,7 @@
                                 {% assign observationId = sectionEntry.act | to_json_string | generate_uuid -%}
                                 {% assign fullObservationId = observationId | prepend: 'Observation/' -%}
                                 {
-                                    "reference": "there {{ fullObservationId }}",
+                                    "reference": "{{ fullObservationId }}",
                                 },
                             {% elsif component.section.code.code == "29762-2" -%}
                                 {% capture shouldRender -%}
@@ -208,8 +208,7 @@
                                     {% assign observationId = sectionEntry.observation | to_json_string | generate_uuid -%}
                                     {% assign fullObservationId = observationId | prepend: 'Observation/' -%}
                                     {
-                                        "reference": "here {{ fullObservationId }}",
-                                        "debug": "{{ sectionEntry.observation.templateId }}"
+                                        "reference": "{{ fullObservationId }}",
                                     },
                                 {% endif -%}
                             {% endif -%}
