@@ -4,16 +4,16 @@
     {%- endcapture -%}
     {% if shouldRender contains "true" -%}
         {% assign observationId = entry.observation | to_json_string | generate_uuid -%} 
-        {% assign templateID = entry.observation.templateId.first.root -%}
-        {% if '2.16.840.1.113883.10.20.22.4.109' -%}
+        {% assign firstTemplate = entry.observation.templateId | to_array | first -%}
+        {% if firstTemplate.root == '2.16.840.1.113883.10.20.22.4.109' -%}
             {% include 'Resource/ObservationHomeEnv' observationCategory: 'social-history', observationEntry: entry.observation, ID: observationId -%}
-        {% elsif templateID == '2.16.840.1.113883.10.20.15.2.3.47' -%}
+        {% elsif firstTemplate.root == '2.16.840.1.113883.10.20.15.2.3.47' -%}
             {% include 'Resource/ObservationDisabilityStatus' observationCategory: 'social-history', observationEntry: entry.observation, ID: observationId -%}
-        {% elsif templateID == '2.16.840.1.113883.10.20.22.4.217' -%}
+        {% elsif firstTemplate.root == '2.16.840.1.113883.10.20.22.4.217' -%}
             {% include 'Resource/ObservationPastPresentOccupation' observationCategory: 'social-history', observationEntry: entry.observation, ID: observationId -%}
-        {% elsif templateID == '2.16.840.1.113883.10.20.22.4.221' -%}
+        {% elsif firstTemplate.root == '2.16.840.1.113883.10.20.22.4.221' -%}
             {% include 'Resource/ObservationUsualWork' observationCategory: 'social-history', observationEntry: entry.observation, ID: observationId -%}
-        {% elsif templateID == '2.16.840.1.113883.10.20.15.3.8' -%}
+        {% elsif firstTemplate.root == '2.16.840.1.113883.10.20.15.3.8' -%}
             {% include 'Resource/ObservationPregnancyStatus' observationCategory: 'social-history', observationEntry: entry.observation, ID: observationId -%}
         {% elsif entry.observation.code.code == '76690-7' -%}
             {% include 'Resource/ObservationSexualOrientation' observationCategory: 'social-history', observationEntry: entry.observation, ID: observationId -%}

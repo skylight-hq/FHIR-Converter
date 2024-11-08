@@ -37,8 +37,8 @@
             { {% include 'Extension/Race' Race: patientRole.patient -%} },
             { {% include 'Extension/Ethnicity' Ethnicity: patientRole.patient -%} },
             {% for entry in SOCIALOBS -%}
-                {% assign templateId = entry.observation.templateId.first.root -%}
-                {% case templateId -%}
+                {% assign firstTemplate = entry.observation.templateId | to_array | first -%}
+                {% case firstTemplate.root -%}
                 {% when '2.16.840.1.113883.10.20.34.3.45' -%}
                     { {% include 'Extension/GenderIdentity' gendIdOb: entry.observation -%} },
                 {% when '2.16.840.1.113883.10.20.15.2.3.48' -%}
