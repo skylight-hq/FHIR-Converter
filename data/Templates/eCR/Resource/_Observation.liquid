@@ -75,7 +75,7 @@
                 {% assign obsRef = observationEntry.value.reference.value | default: observationEntry.value.originalText.reference.value -%}
                 {% assign obsRefVal = obsRef | replace: '#', '' -%}
                 {% assign valueString = text._innerText | find_inner_text_by_id: obsRefVal -%}
-                "valueString": "{{ valueString | escape_special_chars }}",
+                "valueString": "{{ valueString | clean_string_from_tabs | escape_special_chars }}",
             {% endif %}
         {% endif -%}
         "referenceRange":
