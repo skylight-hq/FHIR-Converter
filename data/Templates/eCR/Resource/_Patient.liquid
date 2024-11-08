@@ -67,16 +67,16 @@
                 "relationship": [
                     { {% include 'DataType/CodeableConcept' CodeableConcept: contact.code -%} }
                 ],
-                {% assign names = contact.associatedPerson.name | to_array -%}
-                "name": { {% include 'DataType/HumanName' HumanName: names | first -%} },
+                {% assign name = contact.associatedPerson.name | to_array | first-%}
+                "name": { {% include 'DataType/HumanName' HumanName: name -%} },
                 "telecom": [
                     {% assign telecoms = contact.telecom | to_array -%}
                     {% for telecom in telecoms -%}
                     { {% include 'DataType/ContactPoint' ContactPoint: telecom -%} },
                     {% endfor -%}
                 ],
-                {% assign addrs = contact.addr | to_array -%}
-                "address": { {% include 'DataType/Address' Address: addrs | first -%} },
+                {% assign addr = contact.addr | to_array | first -%}
+                "address": { {% include 'DataType/Address' Address: addr -%} },
              }
         ],
         {% endif contact  -%}
