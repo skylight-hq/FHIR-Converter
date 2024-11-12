@@ -55,7 +55,7 @@
         {
             {% include 'DataType/CodeableConcept' CodeableConcept: observationEntry.targetSiteCode -%}
         },
-        {% include 'Utils/ValueHelper' node: observationEntry, origText: text._innerText %}
+        {% include 'Utils/ValueHelper' value: observationEntry.value, origText: text._innerText %}
         "referenceRange":
         [
             {
