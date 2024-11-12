@@ -40,9 +40,9 @@
                 {% assign firstTemplate = entry.observation.templateId | to_array | first -%}
                 {% if firstTemplate.root == '2.16.840.1.113883.10.20.34.3.45' or entry.observation.code.code == '76691-5' -%}
                     { {% include 'Extension/GenderIdentity' gendIdOb: entry.observation -%} },
-                {% if firstTemplate.root == '2.16.840.1.113883.10.20.15.2.3.48' -%}
+                {% elsif firstTemplate.root == '2.16.840.1.113883.10.20.15.2.3.48' -%}
                     { {% include 'Extension/TribalAffiliation' tribeAOb: entry.observation -%} },
-                {% if firstTemplate.root == '2.16.840.1.113883.10.20.22.4.200' -%}
+                {% elsif firstTemplate.root == '2.16.840.1.113883.10.20.22.4.200' -%}
                      { {% include 'Extension/BirthSex' birthSObs: entry.observation -%} },
                 {% endif -%}
             {% endfor -%}
