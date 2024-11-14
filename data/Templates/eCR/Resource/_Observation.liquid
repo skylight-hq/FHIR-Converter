@@ -105,11 +105,7 @@
                     "note": 
                     [
                         {
-                            {% if noteString != null %}
-                              "text": "{{ noteString | clean_string_from_tabs | escape_special_chars }}"
-                            {% else %}
-                              "text": "{{ entry.act.text.reference._ }}",
-                            {% endif %}
+                            "text": "{{ noteString | clean_string_from_tabs | escape_special_chars }}"
                         }
                     ],
                 {% endif %}
