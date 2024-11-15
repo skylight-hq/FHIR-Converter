@@ -62,25 +62,28 @@
             { {% include 'DataType/ContactPoint' ContactPoint: telecom -%} },
             {% endfor -%}
         ],
-        {% if contact.classCode == "ECON" -%}
         "contact": [
-             {
-                "relationship": [
-                    { {% include 'DataType/CodeableConcept' CodeableConcept: contact.code -%} }
-                ],
-                {% assign name = contact.associatedPerson.name | to_array | first-%}
-                "name": { {% include 'DataType/HumanName' HumanName: name -%} },
-                "telecom": [
-                    {% assign telecoms = contact.telecom | to_array -%}
-                    {% for telecom in telecoms -%}
-                    { {% include 'DataType/ContactPoint' ContactPoint: telecom -%} },
-                    {% endfor -%}
-                ],
-                {% assign addr = contact.addr | to_array | first -%}
-                "address": { {% include 'DataType/Address' Address: addr -%} },
-             }
+        {% for participant in participants -%}
+            {% assign contact = participant.associatedEntity -%}
+            {% if contact.classCode == "ECON" -%}
+                {
+                    "relationship": [
+                        { {% include 'DataType/CodeableConcept' CodeableConcept: contact.code -%} }
+                    ],
+                    {% assign name = contact.associatedPerson.name | to_array | first-%}
+                    "name": { {% include 'DataType/HumanName' HumanName: name -%} },
+                    "telecom": [
+                        {% assign telecoms = contact.telecom | to_array -%}
+                        {% for telecom in telecoms -%}
+                        { {% include 'DataType/ContactPoint' ContactPoint: telecom -%} },
+                        {% endfor -%}
+                    ],
+                    {% assign addr = contact.addr | to_array | first -%}
+                    "address": { {% include 'DataType/Address' Address: addr -%} },
+                },
+            {% endif contact  -%}
+        {% endfor -%}
         ],
-        {% endif contact  -%}
         "communication":
         [
             {% assign languageCommunications = patientRole.patient.languageCommunication | to_array -%}
