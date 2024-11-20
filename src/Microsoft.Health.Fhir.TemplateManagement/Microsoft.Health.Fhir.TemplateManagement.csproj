@@ -80,6 +80,18 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>
+  
+  <Target Name="MessageCoreBuild" BeforeTargets="CoreBuild">
+    <Message Text="I'm MessageCoreBuild" Importance="high" />
+  </Target>
+
+  <Target Name="MessageBuild" BeforeTargets="Build">
+    <Message Text="I'm MessageBuild" Importance="high" />
+  </Target>
+
+  <Target Name="MessagePreBuild" BeforeTargets="PreBuildEvents">
+    <Message Text="I'm MessagePreBuild" Importance="high" />
+  </Target>
     
   <Target Name="CompressTemplates" BeforeTargets="CoreBuild">
     <Exec Command="$(MakeDirectory) $(BinFolder)" /> 
