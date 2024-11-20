@@ -89,11 +89,11 @@
     <Message Text="I'm MessageBuild" Importance="high" />
   </Target>
 
-  <Target Name="MessagePreBuild" BeforeTargets="PreBuildEvents">
+  <Target Name="MessagePreBuild" BeforeTargets="PreBuildEvent">
     <Message Text="I'm MessagePreBuild" Importance="high" />
   </Target>
     
-  <Target Name="CompressTemplates" BeforeTargets="CoreBuild">
+  <Target Name="CompressTemplates" BeforeTargets="PrepareForBuild">
     <Exec Command="$(MakeDirectory) $(BinFolder)" /> 
     <Exec Command="$tar zcvf $(BinFolder)Hl7v2DefaultTemplates.tar.gz -C $(DataFolder)Templates/Hl7v2 ." />
     <Exec Command="tar -zcvf $(BinFolder)CcdaDefaultTemplates.tar.gz -C $(DataFolder)Templates/Ccda ." />
