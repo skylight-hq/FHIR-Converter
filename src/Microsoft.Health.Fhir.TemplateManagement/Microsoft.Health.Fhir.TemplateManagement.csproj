@@ -80,18 +80,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>
-  
-  <Target Name="MessageCoreBuild" BeforeTargets="CoreBuild">
-    <Message Text="I'm MessageCoreBuild" Importance="high" />
-  </Target>
-
-  <Target Name="MessageBuild" BeforeTargets="Build">
-    <Message Text="I'm MessageBuild" Importance="high" />
-  </Target>
-
-  <Target Name="MessagePreBuild" BeforeTargets="PrepareForBuild">
-    <Message Text="I'm MessagePreBuild" Importance="high" />
-  </Target>
     
   <Target Name="CompressTemplates" BeforeTargets="PrepareForBuild">
     <Exec Command="$(MakeDirectory) $(BinFolder)" /> 
@@ -102,14 +90,14 @@
     <Exec Command="tar -zcvf $(BinFolder)FhirToHl7v2DefaultTemplates.tar.gz -C $(DataFolder)Templates/FhirToHl7v2 ." />
   </Target>
 
-  <Target Name="DownloadWinOrasFile" BeforeTargets="CoreBuild">
+  <Target Name="DownloadWinOrasFile" BeforeTargets="PrepareForBuild">
     <DownloadFile SourceUrl="$(OrasWinUrl)" DestinationFolder="$(BinFolder)" DestinationFileName="$(OrasWinTarGzFile)">
       <Output TaskParameter="DownloadedFile" ItemName="Content" />
     </DownloadFile>
     <Exec Command="tar -xvf $(BinFolder)$(OrasWinTarGzFile) -C $(BinFolder) &amp;&amp; $(CopyExecutable) $(BinFolder)oras.exe ." />
   </Target>
 
-  <Target Name="DownloadOSXOrasFile" BeforeTargets="CoreBuild">
+  <Target Name="DownloadOSXOrasFile" BeforeTargets="PrepareForBuild">
     <DownloadFile SourceUrl="$(OrasOSXUrl)" DestinationFolder="$(BinFolder)" DestinationFileName="$(OrasOSXTarGzFile)">
       <Output TaskParameter="DownloadedFile" ItemName="Content" />
     </DownloadFile>
