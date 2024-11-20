@@ -89,7 +89,7 @@
     <Message Text="I'm MessageBuild" Importance="high" />
   </Target>
 
-  <Target Name="MessagePreBuild" BeforeTargets="PreBuildEvent">
+  <Target Name="MessagePreBuild" BeforeTargets="PrepareForBuild">
     <Message Text="I'm MessagePreBuild" Importance="high" />
   </Target>
     
