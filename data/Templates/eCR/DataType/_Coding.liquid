@@ -4,9 +4,9 @@
 {%- endcapture -%}
 "system": {{ codeSystemName }},
 {% if Coding.displayName -%}
-  "display": "{{ Coding.displayName | strip }}",
+  "display": "{{ Coding.displayName | clean_string_from_tabs | strip }}",
 {% elsif Coding.originalText._ -%}
-  "display": "{{ Coding.originalText._ | strip }}",
+  "display": "{{ Coding.originalText._ | clean_string_from_tabs | strip }}",
 {% elsif Coding.originalText.reference._ -%}
   "display": "{{ Coding.originalText.reference._ }}",
 {% elsif codeSystemName contains "loinc" -%}

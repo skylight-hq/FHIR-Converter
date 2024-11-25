@@ -17,7 +17,10 @@
         "status":"{{ procedureEntry.statusCode.code }}",
         "code":
         {
-            {% include 'DataType/CodeableConcept' CodeableConcept: procedureEntry.code -%}
+            {% assign translations = procedureEntry.code.translation | to_array -%}
+            {% assign code = procedureEntry.code | to_array -%}
+            {% assign codes = code | concat: translations -%}
+            {% include 'DataType/CodeableConcept' CodeableConcept: codes -%}
         },
         {% if procedureEntry.effectiveTime.value -%}
             "performedDateTime":"{{ procedureEntry.effectiveTime.value | format_as_date_time }}",
@@ -35,7 +38,7 @@
         "reason": 
         [
             {
-                "display": "{{procedureEntry.entryRelationship.observation.text._}}",
+                "display": "{{procedureEntry.entryRelationship.observation.text._ | clean_string_from_tabs | strip}}",
                 "reference": "{{procedureEntry.entryRelationship.observation | to_json_string | generate_uuid}}",
             },
         ],

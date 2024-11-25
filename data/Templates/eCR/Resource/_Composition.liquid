@@ -72,8 +72,7 @@
                     {% endif -%}
                     {% if component.section.title._ -%}
                     "title":"{{ component.section.title._ }}",
-                    {% endif -%}
-                    {% if component.section.title._ == null -%}
+                    {% else -%}
                     "title":"{{ component.section.code.displayName }}",
                     {% endif -%}
                     "text":
@@ -183,13 +182,13 @@
                                         {% assign observationId = orgComp.observation | to_json_string | generate_uuid -%}
                                         {% assign fullObservationId = observationId | prepend: 'Observation/' -%}
                                         {
+                                            "reference": "{{ fullObservationId }}",
                                             {% if orgComp.observation.code.originalText._ -%}
-                                                "display": "{{orgComp.observation.code.originalText._ | strip}}",
+                                                "display": "{{orgComp.observation.code.originalText._ | clean_string_from_tabs | strip}}",
                                             {% elsif orgComp.observation.code.translation -%}
                                                 {% assign translations = orgComp.observation.code.translation | to_array -%}
                                                 "display": "{{translations.first.displayName | strip}}",
                                             {% endif -%}
-                                            "reference": "{{ fullObservationId }}",
                                         },
                                         {% endif -%}
                                     {% endif -%}
