@@ -56,8 +56,9 @@
 {% assign encounterParticipants = msg.ClinicalDocument.componentOf.encompassingEncounter.encounterParticipant | to_array -%} 
 {% for encounterParticipant in encounterParticipants -%}
   {% if encounterParticipant.assignedEntity -%}
-    {% include 'Resource/Practitioner' practitioner: encounterParticipant.assignedEntity ID: practitionerId -%}
-    {% assign fullPractitionerId = practitionerId | prepend: 'Practitioner/' -%}
+    {% assign encounterParticipantId = encounterParticipant | to_json_string | generate_uuid %}
+    {% include 'Resource/Practitioner' practitioner: encounterParticipant.assignedEntity ID: encounterParticipantId -%}
+    {% assign fullPractitionerId = encounterParticipantId | prepend: 'Practitioner/' -%}
     {% assign practitionerRoleId =  encounterParticipant.assignedEntity | to_json_string | generate_uuid %}
     {% assign fullPractitionerRoleId = practitionerRoleId | prepend: 'PractitionerRole/' %}
     {% include 'Reference/PractitionerRole/Practitioner', REF: fullPractitionerId, ID: practitionerRoleId -%}
