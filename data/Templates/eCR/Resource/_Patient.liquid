@@ -36,6 +36,7 @@
         [
             { {% include 'Extension/Race' Race: patientRole.patient -%} },
             { {% include 'Extension/Ethnicity' Ethnicity: patientRole.patient -%} },
+            { {% include 'Extension/Religion' patient: patientRole.patient -%}},
             {% for entry in SOCIALOBS -%}
                 {% assign firstTemplate = entry.observation.templateId | to_array | first -%}
                 {% if firstTemplate.root == '2.16.840.1.113883.10.20.34.3.45' or entry.observation.code.code == '76691-5' -%}
@@ -55,6 +56,9 @@
             { {% include 'DataType/Address' Address: addr -%} },
             {% endfor -%}
         ],
+        "maritalStatus": {
+            {% include 'DataType/CodeableConcept' CodeableConcept: patientRole.patient.maritalStatusCode -%}
+        },
         "telecom":
         [
             {% assign telecoms = patientRole.telecom | to_array -%}
