@@ -47,7 +47,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             var attributes = new Dictionary<string, object>{
                 {"ContactPoint", Hash.FromAnonymousObject(new { value = "tel:123", use="PG" })}
             };
-            ConvertJsonWithLiquidTemplate(
+            ConvertCheckLiquidTemplate(
                 ECRPath, 
                 attributes, 
                 @"""system"":""pager"", ""value"": ""123"",");
@@ -59,7 +59,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             var attributes = new Dictionary<string, object>{
                 {"ContactPoint", Hash.FromAnonymousObject(new { value = "mailto:abc@me.com", use="WP" })}
             };
-            ConvertJsonWithLiquidTemplate(
+            ConvertCheckLiquidTemplate(
                 ECRPath, 
                 attributes, 
                 @"""system"":""email"", ""value"": ""abc@me.com"", ""use"": ""work"",");
