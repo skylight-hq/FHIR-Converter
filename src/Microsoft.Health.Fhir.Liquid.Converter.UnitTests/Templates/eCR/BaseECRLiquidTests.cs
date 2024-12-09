@@ -18,7 +18,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
         /// Given a path to an eCR template, and attributes. Check that the rendered template
         /// matches the expected contents.
         /// </summary>
-        protected void ConvertJsonWithLiquidTemplate(string templatePath, Dictionary<string, object> attributes, string expectedContent)
+        protected void ConvertCheckLiquidTemplate(string templatePath, Dictionary<string, object> attributes, string expectedContent)
         {
             var templateContent = File.ReadAllText(templatePath);
             var template = TemplateUtility.ParseLiquidTemplate(templatePath, templateContent);

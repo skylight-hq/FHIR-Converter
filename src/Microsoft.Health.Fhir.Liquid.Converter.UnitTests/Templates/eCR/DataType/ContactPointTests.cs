@@ -14,7 +14,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
         [Fact]
         public void GivenNoAttributeReturnsEmpty()
         {
-            ConvertJsonWithLiquidTemplate(ECRPath, new Dictionary<string, object>(), string.Empty);
+            ConvertCheckLiquidTemplate(ECRPath, new Dictionary<string, object>(), string.Empty);
         }
 
         [Fact]
@@ -23,7 +23,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             var attributes = new Dictionary<string, object>{
                 {"ContactPoint", Hash.FromAnonymousObject(new { value = "tel:123" })}
             };
-            ConvertJsonWithLiquidTemplate(
+            ConvertCheckLiquidTemplate(
                 ECRPath, 
                 attributes, 
                 @"""system"":""phone"", ""value"": ""123"", ""use"": """",");
@@ -35,7 +35,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             var attributes = new Dictionary<string, object>{
                 {"ContactPoint", Hash.FromAnonymousObject(new { value = "tel:123", use="H" })}
             };
-            ConvertJsonWithLiquidTemplate(
+            ConvertCheckLiquidTemplate(
                 ECRPath, 
                 attributes, 
                 @"""system"":""phone"", ""value"": ""123"", ""use"": ""home"",");
@@ -71,7 +71,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             var attributes = new Dictionary<string, object>{
                 {"ContactPoint", Hash.FromAnonymousObject(new { value = "fax:123", use="WP" })}
             };
-            ConvertJsonWithLiquidTemplate(
+            ConvertCheckLiquidTemplate(
                 ECRPath, 
                 attributes, 
                 @"""system"":""fax"", ""value"": ""123"", ""use"": ""work"",");
