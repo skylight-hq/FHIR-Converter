@@ -20,7 +20,9 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
         [Fact]
         public void GivenTelValueReturnsPhone()
         {
-            var attributes = new Dictionary<string, object>{{"ContactPoint", Hash.FromAnonymousObject(new { value = "tel:123" })}};
+            var attributes = new Dictionary<string, object>{
+                {"ContactPoint", Hash.FromAnonymousObject(new { value = "tel:123" })}
+            };
             ConvertJsonWithLiquidTemplate(
                 ECRPath, 
                 attributes, 
@@ -30,7 +32,9 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
         [Fact]
         public void GivenTelValuAndUseReturnsPhone()
         {
-            var attributes = new Dictionary<string, object>{{"ContactPoint", Hash.FromAnonymousObject(new { value = "tel:123", use="H" })}};
+            var attributes = new Dictionary<string, object>{
+                {"ContactPoint", Hash.FromAnonymousObject(new { value = "tel:123", use="H" })}
+            };
             ConvertJsonWithLiquidTemplate(
                 ECRPath, 
                 attributes, 
@@ -40,7 +44,9 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
         [Fact]
         public void GivenTelValuAndPagerUseReturnsPager()
         {
-            var attributes = new Dictionary<string, object>{{"ContactPoint", Hash.FromAnonymousObject(new { value = "tel:123", use="PG" })}};
+            var attributes = new Dictionary<string, object>{
+                {"ContactPoint", Hash.FromAnonymousObject(new { value = "tel:123", use="PG" })}
+            };
             ConvertJsonWithLiquidTemplate(
                 ECRPath, 
                 attributes, 
@@ -50,7 +56,9 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
         [Fact]
         public void GivenMailtoReturnsEmail()
         {
-            var attributes = new Dictionary<string, object>{{"ContactPoint", Hash.FromAnonymousObject(new { value = "mailto:abc@me.com", use="WP" })}};
+            var attributes = new Dictionary<string, object>{
+                {"ContactPoint", Hash.FromAnonymousObject(new { value = "mailto:abc@me.com", use="WP" })}
+            };
             ConvertJsonWithLiquidTemplate(
                 ECRPath, 
                 attributes, 
@@ -60,7 +68,9 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
         [Fact]
         public void GivenFaxoReturnsFax()
         {
-            var attributes = new Dictionary<string, object>{{"ContactPoint", Hash.FromAnonymousObject(new { value = "fax:123", use="WP" })}};
+            var attributes = new Dictionary<string, object>{
+                {"ContactPoint", Hash.FromAnonymousObject(new { value = "fax:123", use="WP" })}
+            };
             ConvertJsonWithLiquidTemplate(
                 ECRPath, 
                 attributes, 

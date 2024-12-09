@@ -14,13 +14,17 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
     public class BaseConvertLiquidTemplate
     {
 
+        /// <summary>
+        /// Given a path to an eCR template, and attributes. Check that the rendered template
+        /// matches the expected contents.
+        /// </summary>
         protected void ConvertJsonWithLiquidTemplate(string templatePath, Dictionary<string, object> attributes, string expectedContent)
         {
             var templateContent = File.ReadAllText(templatePath);
             var template = TemplateUtility.ParseLiquidTemplate(templatePath, templateContent);
             Assert.True(template.Root.NodeList.Count > 0);
 
-            // Template should be rendered correctly
+            // Set up the context
             var templateProvider = new TemplateProvider(TestConstants.ECRTemplateDirectory, DataType.Ccda);
             var context = new Context(
                 environments: new List<Hash>(),
@@ -32,6 +36,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
                 cancellationToken: CancellationToken.None);
             context.AddFilters(typeof(Filters));
 
+            // Add the value sets to the context
             var codeContent = File.ReadAllText(Path.Join(TestConstants.ECRTemplateDirectory, "ValueSet", "ValueSet.json"));
             var codeMapping = TemplateUtility.ParseCodeMapping(codeContent);
             Console.WriteLine(codeMapping);
@@ -40,15 +45,17 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
                 context["CodeMapping"] = codeMapping.Root.NodeList.First();
             }
 
-
+            // Hydrate the context with the attributes passed to the function
             foreach (var keyValue in attributes)
             {
                 context[keyValue.Key] = keyValue.Value;
             }
 
+            // Render and strip out unhelpful whitespace (actual post-processing gets rid of this
+            // at the end of the day anyway)
             var actualContent = template.Render(RenderParameters.FromContext(context, CultureInfo.InvariantCulture)).Trim().Replace("\n", " ").Replace("\t", "");
 
-            // Many are harmless, but helpful for debugging
+            // Many are harmless, but can be helpful for debugging
             foreach (var err in template.Errors)
             {
                 Console.WriteLine(err.Message);
