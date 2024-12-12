@@ -51,12 +51,15 @@
                 {% elsif playingEntity.code.displayName -%}
                      {% assign specValue = playingEntity.code.displayName -%}
                 {% else -%}
-                    {% assign specValue = "None" -%}
+                    {% comment %} {% assign specValue = "None" -%} {% endcomment %}
                 {% endif -%}
             {% else  -%}
-                {% assign specValue = "None" -%}
+                {% comment %} {% assign specValue = "None" -%} {% endcomment %}
             {% endif -%}
         {% endif -%}
+        {% if specValue == null and receiveTime != null %}
+            {{ comp.procedure | print_object }}
+        {% endif %}
     {% endfor-%}   
     {% for component in comps %}
         {% include 'Entry/Result/entry_organizer_component' with component, text: text %}
