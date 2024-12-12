@@ -22,8 +22,6 @@
         {% assign collectTime = entry.organizer.effectiveTime.high.value -%}
     {% elsif entry.organizer.effectiveTime and entry.organizer.effectiveTime.value and entry.organizer.effectiveTime.value != "UNK"-%}
         {% assign collectTime = entry.organizer.effectiveTime.value -%}
-    {% else -%}
-        {% assign collectTime = "None" -%}
     {% endif -%}
     
     {% assign comps = entry.organizer.component | to_array -%}
@@ -50,16 +48,9 @@
                     {% assign specValue = playingEntity.code.originalText._ -%}
                 {% elsif playingEntity.code.displayName -%}
                      {% assign specValue = playingEntity.code.displayName -%}
-                {% else -%}
-                    {% comment %} {% assign specValue = "None" -%} {% endcomment %}
                 {% endif -%}
-            {% else  -%}
-                {% comment %} {% assign specValue = "None" -%} {% endcomment %}
             {% endif -%}
         {% endif -%}
-        {% if specValue == null and receiveTime != null %}
-            {{ comp.procedure | print_object }}
-        {% endif %}
     {% endfor-%}   
     {% for component in comps %}
         {% include 'Entry/Result/entry_organizer_component' with component, text: text %}
