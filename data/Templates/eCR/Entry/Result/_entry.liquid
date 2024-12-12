@@ -26,7 +26,7 @@
     {% endif -%}
     
     {% assign specValue = null %}
-    {% assign recieveTime = null %}
+    {% assign receiveTime = null %}
     {% assign comps = entry.organizer.component | to_array -%}
     {% for comp in comps -%}
         {% if comp.procedure  -%}
@@ -59,3 +59,7 @@
         {% include 'Entry/Result/entry_organizer_component' with component, text: text, specValue: specValue, collectTime: collectTime, receiveTime: receiveTime, diagnosticId: diagnosticId %}
     {% endfor %}
 {% endif -%}
+{% comment %} Prevent weird variable leakage {% endcomment %}
+{% assign specValue = null %}
+{% assign receiveTime = null %}
+{% assign collectTime = null %}
