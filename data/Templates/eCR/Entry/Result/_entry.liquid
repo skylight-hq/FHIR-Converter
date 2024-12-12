@@ -16,6 +16,7 @@
         {% include 'Reference/DiagnosticReport/Performer' ID: diagnosticId, REF: fullPerformerId -%}
         {% endif -%}
     {% endif -%}
+    {% assign collectTime = null %}
     {% if entry.organizer.effectiveTime.low and entry.organizer.effectiveTime.low.value -%}
         {% assign collectTime = entry.organizer.effectiveTime.low.value -%}
     {% elsif entry.organizer.effectiveTime.high and entry.organizer.effectiveTime.high.value -%}
@@ -24,6 +25,8 @@
         {% assign collectTime = entry.organizer.effectiveTime.value -%}
     {% endif -%}
     
+    {% assign specValue = null %}
+    {% assign recieveTime = null %}
     {% assign comps = entry.organizer.component | to_array -%}
     {% for comp in comps -%}
         {% if comp.procedure  -%}
@@ -53,6 +56,6 @@
         {% endif -%}
     {% endfor-%}   
     {% for component in comps %}
-        {% include 'Entry/Result/entry_organizer_component' with component, text: text %}
+        {% include 'Entry/Result/entry_organizer_component' with component, text: text, specValue: specValue, collectTime: collectTime, receiveTime: receiveTime, diagnosticId: diagnosticId %}
     {% endfor %}
 {% endif -%}
