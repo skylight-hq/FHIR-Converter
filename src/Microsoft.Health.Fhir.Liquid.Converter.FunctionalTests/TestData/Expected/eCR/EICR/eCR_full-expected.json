@@ -974,7 +974,10 @@
             "city": "NEWPORT BEACH",
             "state": "CA",
             "country": "USA",
-            "postalCode": "92663"
+            "postalCode": "92663",
+            "period": {
+              "start": "2019-04-10"
+            }
           }
         ],
         "maritalStatus": {
