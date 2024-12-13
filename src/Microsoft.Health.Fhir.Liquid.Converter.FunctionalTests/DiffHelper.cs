@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Health.Fhir.Liquid.Converter.FunctionalTests
 {
+    // from https://stackoverflow.com/questions/24876082/find-and-return-json-differences-using-newtonsoft-in-c
     public static class DiffHelper
     {
         public static JObject FindDiff(this JToken Current, JToken Model)
