@@ -140,7 +140,7 @@
         {% assign observationValueReferenceValue = observationEntry.value.reference.value -%}
         "extension":
             [ {
-                {% if specimenValue != null or collectTime != null or receiveTime != null or observationTextReferenceValue != null or observationValueReferenceValue != null -%}
+                {% if specimenValue != null or collectTime != null or receiveTime != null -%}
 
                     "url" : "http://hl7.org/fhir/R4/specimen.html",
                     "extension": [
