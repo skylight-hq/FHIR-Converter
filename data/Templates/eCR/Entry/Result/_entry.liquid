@@ -54,7 +54,7 @@
                 {% endif -%}
             {% endif -%}
         {% endif -%}
-    {% endfor-%}   
+    {% endfor -%}   
     {% for component in comps %}
         {% include 'Entry/Result/entry_organizer_component' with component, text: text, specValue: specValue, collectTime: collectTime, receiveTime: receiveTime, diagnosticId: diagnosticId %}
     {% endfor %}
