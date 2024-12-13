@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
 {
-    public class ContactPointTests : BaseConvertLiquidTemplate
+    public class ContactPointTests : BaseECRLiquidTests
     {
         private static readonly string ECRPath = Path.Join(
             TestConstants.ECRTemplateDirectory, "DataType", "_ContactPoint.liquid"

@@ -11,14 +11,16 @@ using Xunit;
 
 namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
 {
-    public class BaseConvertLiquidTemplate
+    public class BaseECRLiquidTests
     {
-
         /// <summary>
         /// Given a path to an eCR template, and attributes. Check that the rendered template
         /// matches the expected contents.
         /// </summary>
-        protected void ConvertCheckLiquidTemplate(string templatePath, Dictionary<string, object> attributes, string expectedContent)
+        /// <param name="templatePath">Path to the template being tested</param>
+        /// <param name="attributes">Dictionary of attributes to hydrate the template</param>
+        /// <param name="expectedContent">Serialized string that ought to be returned</param>
+        protected static void ConvertCheckLiquidTemplate(string templatePath, Dictionary<string, object> attributes, string expectedContent)
         {
             var templateContent = File.ReadAllText(templatePath);
             var template = TemplateUtility.ParseLiquidTemplate(templatePath, templateContent);
@@ -53,7 +55,8 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
 
             // Render and strip out unhelpful whitespace (actual post-processing gets rid of this
             // at the end of the day anyway)
-            var actualContent = template.Render(RenderParameters.FromContext(context, CultureInfo.InvariantCulture)).Trim().Replace("\n", " ").Replace("\t", "");
+            var actualContent = template.Render(RenderParameters.FromContext(context, CultureInfo.InvariantCulture)).Trim().Replace("\n", " ").Replace("\t", string.Empty);
+            actualContent = Filters.CleanStringFromTabs(actualContent);
 
             // Many are harmless, but can be helpful for debugging
             foreach (var err in template.Errors)
@@ -64,5 +67,4 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             Assert.Equal(expectedContent, actualContent);
         }
     }
-   
 }
