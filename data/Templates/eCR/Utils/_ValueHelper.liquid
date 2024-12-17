@@ -9,7 +9,12 @@
     "valueBoolean" : {{ value.value }}
 {% elsif value.value -%}
     "valueQuantity": {
-    "value":{{ value.value | to_json_number }},
+    "value":
+    {% if value.value startswith "." %}
+        {{ "0" | append: value.value | to_json_number }},
+    {% else %}
+        {{ value.value | to_json_number }},
+    {% endif %}
         {% if value.unit and  value.unit != "null" -%}
         "unit":"{{ value.unit }}",
         {% endif -%}
