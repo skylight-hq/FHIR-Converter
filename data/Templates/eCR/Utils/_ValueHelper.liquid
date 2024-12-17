@@ -11,9 +11,9 @@
     "valueQuantity": {
     "value":
     {% if value.value startswith "." %}
-        {{ "0" | append: value.value | to_json_number }},
+        {{ "0" | append: value.value }},
     {% else %}
-        {{ value.value | to_json_number }},
+        {{ value.value }},
     {% endif %}
         {% if value.unit and  value.unit != "null" -%}
         "unit":"{{ value.unit }}",
