@@ -23,7 +23,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             var attributes = new Dictionary<string, object>{
                 {"value", Hash.FromAnonymousObject(new { value = ".29"})}
             };
-            ConvertCheckLiquidTemplate(ECRPath, attributes, "\"valueQuantity\": { \"value\":\".29\", },");
+            ConvertCheckLiquidTemplate(ECRPath, attributes, "\"valueQuantity\": { \"value\":.29, },");
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             var attributes = new Dictionary<string, object>{
                 {"value", Hash.FromAnonymousObject(new { value = "300"})}
             };
-            ConvertCheckLiquidTemplate(ECRPath, attributes, "\"valueQuantity\": { \"value\":\"300\", },");
+            ConvertCheckLiquidTemplate(ECRPath, attributes, "\"valueQuantity\": { \"value\":300, },");
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             var attributes = new Dictionary<string, object>{
                 {"value", Hash.FromAnonymousObject(new { value = "300.00"})}
             };
-            ConvertCheckLiquidTemplate(ECRPath, attributes, "\"valueQuantity\": { \"value\":\"300.00\", },");
+            ConvertCheckLiquidTemplate(ECRPath, attributes, "\"valueQuantity\": { \"value\":300.00, },");
         }
 
         [Fact]
@@ -50,7 +50,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             var attributes = new Dictionary<string, object>{
                 {"value", Hash.FromAnonymousObject(new { value = "-300.00"})}
             };
-            ConvertCheckLiquidTemplate(ECRPath, attributes, "\"valueQuantity\": { \"value\":\"-300.00\", },");
+            ConvertCheckLiquidTemplate(ECRPath, attributes, "\"valueQuantity\": { \"value\":-300.00, },");
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             var attributes = new Dictionary<string, object>{
                 {"value", Hash.FromAnonymousObject(new { value = ".29" , unit = "/d"})}
             };
-            ConvertCheckLiquidTemplate(ECRPath, attributes, "\"valueQuantity\": { \"value\":\".29\", \"unit\":\"/d\", },");
+            ConvertCheckLiquidTemplate(ECRPath, attributes, "\"valueQuantity\": { \"value\":.29, \"unit\":\"/d\", },");
         }
     }
 }
