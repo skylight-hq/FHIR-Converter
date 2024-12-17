@@ -1,4 +1,3 @@
-{{ value |  print_object }}
 {% if value.code %}
     "valueCodeableConcept" : {
         {% assign translations = value.translation | to_array -%}
