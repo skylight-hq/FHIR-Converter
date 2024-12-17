@@ -32,7 +32,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             var attributes = new Dictionary<string, object>{
                 {"value", Hash.FromAnonymousObject(new { value = "300"})}
             };
-            ConvertCheckLiquidTemplate(ECRPath, attributes, "\"valueQuantity\": { \"value\":300, },");
+            ConvertCheckLiquidTemplate(ECRPath, attributes, "\"valueQuantity\": { \"value\":300, },"); 
         }
 
         [Fact]
