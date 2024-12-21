@@ -53,6 +53,10 @@
                     ],
                 },
                 "preferred":"{{ languageCommunication.preferenceInd.value }}",
+                "extension": 
+                [
+                    { {% include 'Extension/PatientProficiency', modeCode: languageCommunication.modeCode, proficiencyLevelCode: languageCommunication.proficiencyLevelCode -%} },
+                ],
             },
             {% endfor -%}
         ],
