@@ -271,6 +271,40 @@
         "code": ""
       }
     },
+    "ValueSet/LanguageAbilityMode": {
+      "esgn": {
+        "display": "Expressed signed"
+      },
+      "esp": {
+        "display": "Expressed spoken"
+      },
+      "ewr": {
+        "display": "Expressed written"
+      },
+      "rsgn": {
+        "display": "Received signed"
+      },
+      "rsp": {
+        "display": "Received spoken"
+      },
+      "rwr": {
+        "display": "Received written"
+      }
+    },
+    "ValueSet/LanguageAbilityProficiency": {
+      "e": {
+        "display": "Excellent"
+      },
+      "f": {
+        "display": "Fair"
+      },
+      "g": {
+        "display": "Good"
+      },
+      "p": {
+        "display": "Poor"
+      }
+    },
     "ValueSet/Language": {
       "en": {
         "code": "en",

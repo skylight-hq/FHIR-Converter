@@ -1,0 +1,28 @@
+{% if modeCode != null or proficiencyLevelCode != null %}
+"url": "http://hl7.org/fhir/StructureDefinition/patient-proficiency",
+"extension": 
+[
+    {% if modeCode %}
+    {
+        "url": "type",
+        "valueCoding": 
+        {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityMode",
+            "code": "{{ modeCode.code }}",
+            "display": "{{ modeCode.code | downcase | get_property: 'ValueSet/LanguageAbilityMode', 'display' }}",        
+        },
+    },
+    {% endif -%}
+    {% if proficiencyLevelCode %}
+    {
+        "url": "level",
+        "valueCoding": 
+        {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityProficiency",
+            "code": "{{ proficiencyLevelCode.code }}",
+            "display": "{{ proficiencyLevelCode.code | downcase | get_property: 'ValueSet/LanguageAbilityProficiency', 'display' }}",        
+        },
+    },
+    {% endif -%}
+],
+{% endif -%}
