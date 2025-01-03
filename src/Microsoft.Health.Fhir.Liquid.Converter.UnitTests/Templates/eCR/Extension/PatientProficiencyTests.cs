@@ -37,7 +37,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             ConvertCheckLiquidTemplate(
                 ECRPath,
                 attributes,
-                @"""url"": ""http://hl7.org/fhir/StructureDefinition/patient-proficiency"", ""extension"": [ { ""url"": ""type"", ""valueCoding"": { ""system"": ""http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityMode"", ""code"": ""ESP"", ""display"": ""Expressed spoken"", }, }, { ""url"": ""level"", ""valueCoding"": { ""system"": ""http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityProficiency"", ""code"": ""E"", ""display"": ""Excellent"", }, }, ],");
+                @"""url"": ""http://hl7.org/fhir/StructureDefinition/patient-proficiency"", ""extension"": [ { ""url"": ""type"", ""valueCoding"": { ""system"": ""http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityMode"", ""code"": ""esp"", ""display"": ""Expressed spoken"", }, }, { ""url"": ""level"", ""valueCoding"": { ""system"": ""http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityProficiency"", ""code"": ""e"", ""display"": ""Excellent"", }, }, ],");
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             ConvertCheckLiquidTemplate(
                 ECRPath,
                 attributes,
-                @"""url"": ""http://hl7.org/fhir/StructureDefinition/patient-proficiency"", ""extension"": [ { ""url"": ""type"", ""valueCoding"": { ""system"": ""http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityMode"", ""code"": ""ESP"", ""display"": ""Expressed spoken"", }, }, ],");
+                @"""url"": ""http://hl7.org/fhir/StructureDefinition/patient-proficiency"", ""extension"": [ { ""url"": ""type"", ""valueCoding"": { ""system"": ""http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityMode"", ""code"": ""esp"", ""display"": ""Expressed spoken"", }, }, ],");
         }
 
         [Fact]
@@ -75,7 +75,45 @@ namespace Microsoft.Health.Fhir.Liquid.Converter.UnitTests
             ConvertCheckLiquidTemplate(
                 ECRPath,
                 attributes,
-                @"""url"": ""http://hl7.org/fhir/StructureDefinition/patient-proficiency"", ""extension"": [ { ""url"": ""level"", ""valueCoding"": { ""system"": ""http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityProficiency"", ""code"": ""E"", ""display"": ""Excellent"", }, }, ],");
+                @"""url"": ""http://hl7.org/fhir/StructureDefinition/patient-proficiency"", ""extension"": [ { ""url"": ""level"", ""valueCoding"": { ""system"": ""http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityProficiency"", ""code"": ""e"", ""display"": ""Excellent"", }, }, ],");
+        }
+
+        [Fact]
+        public void GivenInvalidProficiencyLevelCodeReturnsSameProficiencyLevelCodeInPatientProficiency()
+        {
+            var attributes = new Dictionary<string, object>
+            {
+                {
+                    "proficiencyLevelCode", new Dictionary<string, string>
+                    {
+                        { "code", "na" },
+                    }
+                },
+            };
+
+            ConvertCheckLiquidTemplate(
+                ECRPath,
+                attributes,
+                @"""url"": ""http://hl7.org/fhir/StructureDefinition/patient-proficiency"", ""extension"": [ { ""url"": ""level"", ""valueCoding"": { ""system"": ""http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityProficiency"", ""code"": ""na"", ""display"": ""na"", }, }, ],");
+        }
+
+        [Fact]
+        public void GivenInvalidModeCodeReturnsSameModeCodeInPatientProficiency()
+        {
+            var attributes = new Dictionary<string, object>
+        {
+            {
+                "modeCode", new Dictionary<string, string>
+                {
+                    { "code", "na" },
+                }
+            },
+        };
+
+            ConvertCheckLiquidTemplate(
+                ECRPath,
+                attributes,
+                @"""url"": ""http://hl7.org/fhir/StructureDefinition/patient-proficiency"", ""extension"": [ { ""url"": ""type"", ""valueCoding"": { ""system"": ""http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityMode"", ""code"": ""na"", ""display"": ""na"", }, }, ],");
         }
     }
 }
